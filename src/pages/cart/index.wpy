@@ -1,0 +1,21 @@
+<template>
+	<div class="cart">{{msg}}</div>
+</template>
+
+<script>
+	import wepy from '@wepy/core'
+
+	wepy.page({
+		data: {
+			msg: "cart",
+			methods: {}
+		}
+	})
+</script>
+<config>
+	{
+	navigationBarTitleText: '购物车',
+	}
+</config>
+<style lang='less' scoped>
+</style>

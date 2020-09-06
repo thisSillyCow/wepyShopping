@@ -1,0 +1,24 @@
+<template>
+	<div class="message">
+		{{msg}}
+	</div>
+</template>
+
+<script>
+	import wepy from '@wepy/core'
+
+	wepy.page({
+		data: {
+			msg: 'message',
+			computed: {},
+			methods: {}
+		}
+	})
+</script>
+<config>
+	{
+	navigationBarTitleText: '消息',
+	}
+</config>
+<style lang='less' scoped>
+</style>
