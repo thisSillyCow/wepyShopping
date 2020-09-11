@@ -50,13 +50,12 @@ wepy.app({
 </script>
 <config>
 	{
-		
 		pages: [
-			'pages/home/index',
-      'pages/person/index',
-			'pages/cart/index',
-			'pages/classification/index',
-		
+			'pages/home/home/index',
+      'pages/home/person/index',
+			'pages/home/cart/index',
+			'pages/home/classification/index',
+       'pages/particulars/index',
 		],
 		window: {
 		  "navigationBarBackgroundColor": "#fff",
@@ -72,25 +71,25 @@ wepy.app({
 			borderStyle:'black',
 			list: [
 				{
-					"pagePath": "pages/home/index",
+					"pagePath": "pages/home/home/index",
 					"text": "首页",
 					"iconPath": "images/home.png",
 					"selectedIconPath": "images/home-active.png"
 				},
         {
-					"pagePath": "pages/classification/index",
+					"pagePath": "pages/home/classification/index",
 					"text": "分类",
 					"iconPath": "images/classification.png",
 					"selectedIconPath": "images/classification-active.png"
 				},
 				{
-					"pagePath": "pages/cart/index",
+					"pagePath": "pages/home/cart/index",
 					"text": "购物车",
 					"iconPath": "images/cart.png",
 					"selectedIconPath": "images/cart-active.png"
 				},
         	{
-					"pagePath": "pages/person/index",
+					"pagePath": "pages/home/person/index",
 					"text": "我的",
 					"iconPath": "images/person.png",
 					"selectedIconPath": "images/person-active.png"

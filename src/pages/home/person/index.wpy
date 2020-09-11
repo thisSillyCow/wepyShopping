@@ -1,17 +1,17 @@
 <template>
   <div class="person">
-    <image src="../../images/stage-backg.jpg"
+    <image src="../../../images/stage-backg.jpg"
            class="page_section" />
     <div class="stage_backg">
       <div class="user_info">
-        <img src="../../images/head-backg.png"
+        <img src="../../../images/head-backg.png"
              class="heda_backg" />
         <div class="user_name">
           <span class="name_money call">用户的名字呀</span>
           <span class="name_money  amount_money">可用余额：1000 (元/￥)</span>
         </div>
         <div class="user_variable">
-          <img src="../../images/white-right.png"
+          <img src="../../../images/white-right.png"
                class="arrow_variable" />
         </div>
       </div>
@@ -21,28 +21,28 @@
           <span class="my_order_text">我的订单</span>
           <div class="display:flex">
             <span class="look_all">查看全部</span>
-            <img src="../../images/arrow-right.png"
+            <img src="../../../images/arrow-right.png"
                  class="all_variable" />
           </div>
         </div>
         <div class="order_state_list">
           <div class="order_state">
-            <img src="../../images/wait-pay.png"
+            <img src="../../../images/wait-pay.png"
                  class="order_icon" />
             <span class="order_text">待付款</span>
           </div>
           <div class="order_state">
-            <img src="../../images/deliver-goods.png"
+            <img src="../../../images/deliver-goods.png"
                  class="order_icon" />
             <span class="order_text">待发货</span>
           </div>
           <div class="order_state">
-            <img src="../../images/completed.png"
+            <img src="../../../images/completed.png"
                  class="order_icon" />
             <span class="order_text">已完成</span>
           </div>
           <div class="order_state">
-            <img src="../../images/evaluation-criterion.png"
+            <img src="../../../images/evaluation-criterion.png"
                  class="order_icon" />
             <span class="order_text">待评价</span>
           </div>
@@ -54,10 +54,10 @@
              :style="{borderBottom:(idx==administrationList.length -1?'0rpx':'')}"
              v-for="(item, idx) in  administrationList"
              :key="idx">
-          <img src="../../images/{{item.pic}}"
+          <img src="../../../images/{{item.pic}}"
                class="list_icon" />
           <span class="list_text">{{item.administrationName}} {{idx}}</span>
-          <img src="../../images/arrow-right.png"
+          <img src="../../../images/arrow-right.png"
                class="list_variable" />
         </div>
       </div>
@@ -113,7 +113,7 @@ wepy.page({
 </script>
 
 <style lang='less' scoped>
-@import '../../assets/variable.less';
+@import '../../../assets/variable.less';
 .person {
   position: relative;
   background: @bgcolor;

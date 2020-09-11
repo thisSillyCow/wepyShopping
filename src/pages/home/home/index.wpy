@@ -1,54 +1,101 @@
 <template>
   <div class="home">
-    <!-- container -->
-    <swiper class="page_section_spacing container"
-            indicator-dots="{{indicatorDots}}"
-            autoplay="{{autoplay}}"
-            interval="{{interval}}"
-            duration="{{duration}}">
-      <swiper-item v-for="(item, idx) in  background"
-                   class="page_section_spacing"
-                   :key="idx">
-        <image src="../../images/{{item}}"
-               class="page_section_spacing"
-               @tap="handleTap" />
-      </swiper-item>
-    </swiper>
+    <div class="container">
+      <div class="search_head">
+        <div class="search_module">
+          <img src="../../../images/search-icon.png"
+               class="search_icon" />
+          <input type="text"
+                 class="search_commodity"
+                 placeholder="搜索你想要的生活" />
+        </div>
+        <img src="../../../images/my-icon.png"
+             class="my_head" />
+      </div>
+      <swiper class="page_section_spacing "
+              indicator-dots="{{indicatorDots}}"
+              autoplay="{{autoplay}}"
+              interval="{{interval}}"
+              duration="{{duration}}">
+        <swiper-item v-for="(item, idx) in  background"
+                     class="page_section_spacing"
+                     :key="idx">
+          <image src="../../../images/{{item}}"
+                 class="page_section_spacing"
+                 @tap="handleTap" />
+        </swiper-item>
+      </swiper>
+    </div>
+    <div class="shopping_guide">
+      <div class="guide">
+        <img src="../../../images/site-clearing.png"
+             class="shopping_icon" />
+        <span class="guide_text">清场甩货</span>
+      </div>
+      <div class="guide">
+        <img src="../../../images/activity-icon.png"
+             class="shopping_icon" />
+        <span class="guide_text">活动版块</span>
+      </div>
+      <div class="guide">
+        <img src="../../../images/integral-icon.png"
+             class="shopping_icon" />
+        <span class="guide_text">积分兑换</span>
+      </div>
+      <div class="guide">
+        <img src="../../../images/serve-icon.png"
+             class="shopping_icon" />
+        <span class="guide_text">套餐服务</span>
+      </div>
+    </div>
+    <div class="commodity">
+      <div class="commodity_head">
+        <img src="../../../images/activity-area.png"
+             class="commodity_icon" />
+      </div>
+    </div>
+
+    <div class="commodity">
+      <div class="commodity_head">
+        <img src="../../../images/commodity-rec.png"
+             class="commodity_icon" />
+      </div>
+    </div>
 
     <div class="recommend container">
       <span>人气推荐</span>
-      <img src="../../images/arrow-right.png"
+      <img src="../../../images/arrow-right.png"
            class="all_variable" />
     </div>
     <div class="shopping_modular ">
-
       <div class="shopping_list">
         <div v-for=" (item, idx) in  shoppingList"
              :key="idx"
+             @tap="shpooingDetails(item)"
              class="shopping">
           <div class="shopping_publicity">
-            <img :src="[item.status == 1 ? '../../images/hot.png': item.status == 2 ? '../../images/recommend.png':'../../images/event.png']"
+            <img :src="[item.status == 1 ? '../../../images/hot.png': item.status == 2 ? '../../../images/recommend.png':'../../../images/event.png']"
                  class="shopping_pic_hot"
                  v-if="item.status != 0" />
             <img :src="item.pic"
                  class="shopping_pic" />
           </div>
           <div class="shopping_state">
-            <div class="shopping_head"> <span>{{item.name}}</span></div>
+            <div class="shopping_head"><span>{{item.name}}</span></div>
             <div class="discounts"
                  v-if="item.discountsStatus.length !=0">
               <span class="discounts_text"
-                    v-for="(itemDiscounts, id) in   item.discountsStatus"
+                    v-for="(itemDiscounts, id) in item.discountsStatus"
                     :key="id">{{itemDiscounts.name}}</span>
             </div>
             <div class="shopping_price">
-              <span class="similar_product_price"> ¥
+              <span class="similar_product_price">¥
                 <span class="big_price">{{item.sellPrice}}</span>
                 <span class="small-price">.{{item.decimalsPrice}}</span>
               </span>
             </div>
             <div class="shopping_price past_due">
-              <span class="similar_product_price"> ¥
+              <span class="similar_product_price">¥
                 <span class="big_price">{{item.originalPrice}}</span>
                 <span class="small-price">.{{item.originalDecimalsPrice}}</span>
               </span>
@@ -57,15 +104,13 @@
         </div>
       </div>
     </div>
-
     <div class="load_data">上拉加载中...</div>
   </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
-import store from '../../store'
-
+import store from '../../../store'
 wepy.page({
   store,
   config: {
@@ -82,7 +127,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 1, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 78,
         decimalsPrice: '50',
         originalPrice: 90,
@@ -92,7 +137,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 2, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 90,
         decimalsPrice: '50',
         originalPrice: 150,
@@ -102,7 +147,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 3, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 70,
         decimalsPrice: '50',
         originalPrice: 80,
@@ -112,7 +157,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 90,
         decimalsPrice: '50',
         originalPrice: 150,
@@ -122,7 +167,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 70,
         decimalsPrice: '50',
         originalPrice: 80,
@@ -132,7 +177,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 90,
         decimalsPrice: '50',
         originalPrice: 150,
@@ -142,7 +187,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 90,
         decimalsPrice: '50',
         originalPrice: 150,
@@ -152,7 +197,7 @@ wepy.page({
       {
         name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
         status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../images/8.jpg',
+        pic: '../../../images/8.jpg',
         sellPrice: 90,
         decimalsPrice: '50',
         originalPrice: 150,
@@ -171,6 +216,11 @@ wepy.page({
     onReachBottom () {
       console.log('上拉加载.....')
     },
+    shpooingDetails (details) {
+      wx.navigateTo({
+        url: `../../particulars/index?shoppingId=1`
+      })
+    },
     handleTap () {
       console.log('++++++++++++++++++++++')
     },
@@ -181,8 +231,8 @@ wepy.page({
 })
 </script>
 <style lang="less" scoped>
-@import '../../assets/variable.less';
-@swiperH: 368rpx;
+@import '../../../assets/variable.less';
+@swiperH: 286rpx;
 @shoppingW: 338rpx;
 @shoppingRadius: 12rpx;
 .home {
@@ -192,14 +242,83 @@ wepy.page({
   flex-direction: column;
 }
 .container {
-  padding: 30rpx 21rpx;
-  background: #fff;
+  padding: 13rpx 21rpx;
+}
+.search_head {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+  align-items: center;
+  .search_module {
+    background: #fff;
+    display: flex;
+    flex: 1;
+    margin-right: 30rpx;
+    border: 1rpx solid #dcdcdc;
+    border-radius: 10rpx;
+    flex-direction: row;
+    align-items: center;
+    padding: 17rpx;
+    .search_icon {
+      width: 36rpx;
+      height: 37rpx;
+    }
+    .search_commodity {
+      margin-left: 17rpx;
+      font-size: 30rpx;
+      color: #bdbdbd;
+    }
+  }
+  .my_head {
+    width: 53rpx;
+    height: 53rpx;
+  }
 }
 .page_section_spacing {
   width: 100%;
   height: @swiperH;
   border-radius: @shoppingRadius;
 }
+.shopping_guide {
+  display: flex;
+  height: 192rpx;
+  background: #fff;
+  .guide {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .shopping_icon {
+      width: 98rpx;
+      height: 98rpx;
+    }
+    .guide_text {
+      margin-top: 29rpx;
+      font-size: 30rpx;
+      color: #626262;
+    }
+  }
+}
+.commodity {
+  display: flex;
+  flex: 1;
+  background: #fff;
+  .commodity_head {
+    display: flex;
+    flex: 1;
+    height: 71rpx;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1rpx solid#EDEDED;
+    .commodity_icon {
+      width: 460rpx;
+      height: 54rpx;
+    }
+  }
+}
+
 .recommend {
   margin-top: 16rpx;
   display: flex;
@@ -314,7 +433,7 @@ wepy.page({
 </style>
 <config>
 	{
-    navigationBarTitleText: '广东和源酒业有限公司',
+    navigationBarTitleText: '首页',
     enablePullDownRefresh:true,
     onReachBottomDistance:100,
 	}

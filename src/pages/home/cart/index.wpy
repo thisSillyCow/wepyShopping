@@ -1,16 +1,16 @@
 <template>
-	<div class="cart">{{msg}}</div>
+  <div class="cart">{{msg}}</div>
 </template>
 
 <script>
-	import wepy from '@wepy/core'
+import wepy from '@wepy/core'
 
-	wepy.page({
-		data: {
-			msg: "cart",
-			methods: {}
-		}
-	})
+wepy.page({
+  data: {
+    msg: 'cart',
+    methods: {}
+  }
+})
 </script>
 <config>
 	{
