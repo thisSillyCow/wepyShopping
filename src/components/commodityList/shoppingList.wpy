@@ -1,0 +1,155 @@
+<template>
+  <div class="shoppingList">
+    <!-- <span>{{msg}}</span> -->
+    <div class="shopping_list">
+      <div v-for=" (item, idx) in  shoppingList"
+           :key="idx"
+           @tap="shpooingDetails(item)"
+           class="shopping">
+        <div class="shopping_num">
+          <div class="shopping_publicity">
+            <img :src="[item.status == 1 ? '../../images/hot.png': item.status == 2 ? '../../images/recommend.png':'../../images/event.png']"
+                 class="shopping_pic_hot"
+                 v-if="item.status != 0" />
+            <img :src="item.pic"
+                 class="shopping_pic" />
+          </div>
+          <div class="shopping_state">
+            <div class="shopping_head"><span>{{item.name}}{{idx}}</span></div>
+            <div class="discounts"
+                 v-if="item.discountsStatus.length !=0">
+              <span class="discounts_text"
+                    v-for="(itemDiscounts, id) in item.discountsStatus"
+                    :key="id">{{itemDiscounts.name}}</span>
+            </div>
+            <div class="shopping_money">
+              <div class="shopping_price">
+                <span class="similar_product_price">¥
+                  <span class="big_price">{{item.sellPrice}}</span>
+                </span>
+              </div>
+              <div class="past_due"> ¥{{item.originalPrice}} </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+wepy.page({
+  props: {
+    shoppingList: Array
+  },
+  data: {
+    msg: 'shoppingList'
+
+  },
+  methods: {
+    shpooingDetails (details) {
+      wx.navigateTo({
+        url: `../../particulars/index?shoppingId=1`
+      })
+    }
+  }
+})
+</script>
+<style lang='less' scoped>
+@import '../../assets/variable.less';
+@shoppingW: 374rpx;
+@shoppingPicW: 280rpx;
+@discountsP: 5rpx;
+.shopping_list {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  flex-direction: row;
+  background: #eee;
+  .shopping {
+    width: @shoppingW;
+    background: #fff;
+    margin-bottom: 2rpx;
+    .shopping_num {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+      flex-direction: column;
+      padding: 24rpx;
+      .shopping_publicity {
+        position: relative;
+        width: @shoppingPicW;
+        height: @shoppingPicW;
+        padding: @discountsP 0;
+        margin: auto;
+        .shopping_pic {
+          width: @shoppingPicW;
+          height: inherit;
+        }
+        .shopping_pic_hot {
+          position: absolute;
+          width: 100rpx;
+          height: 100rpx;
+          right: 0;
+          top: 0;
+        }
+      }
+
+      .shopping_state {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        .shopping_head {
+          display: flex;
+          flex: 1;
+          font-size: 32rpx;
+          color: @accessoryText;
+          word-break: break-all;
+          text-overflow: ellipsis;
+          display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+          -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+          -webkit-line-clamp: 1; /** 显示的行数 **/
+          overflow: hidden; /** 隐藏超出的内容 **/
+        }
+        .discounts {
+          display: flex;
+          flex-direction: row;
+          padding: @discountsP 0;
+          .discounts_text {
+            border: 0.5rpx solid @moneyColor;
+            // background-image: url('../../images/abscissa-icon.png') no-repeat;
+            color: @moneyColor;
+            font-size: 20rpx;
+            margin: 5rpx;
+            padding: 2rpx 5rpx;
+          }
+        }
+        .shopping_money {
+          display: flex;
+          flex: 1;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .shopping_price {
+            display: flex;
+            flex-direction: row;
+            color: @moneyColor;
+            .big_price {
+              font-size: 38rpx;
+              font-weight: bold;
+            }
+          }
+          .past_due {
+            text-decoration: line-through;
+            color: #cecece;
+            font-size: 25rpx;
+            padding-right: 20rpx;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

@@ -53,173 +53,153 @@
         <img src="../../../images/activity-area.png"
              class="commodity_icon" />
       </div>
+      <div class="mall_advertising">
+        <img src="../../../images/mall-ad-icon.png"
+             class="mall_ad" />
+        <div class="mall_line" />
+        <swiper class="revolving_door "
+                autoplay="{{autoplay}}"
+                interval="{{interval}}"
+                display-multiple-items="{{2}}"
+                vertical="{{true}}"
+                duration="{{duration}}">
+          <block v-for="(item, idx) in  background2"
+                 :key="idx">
+            <swiper-item>
+              <view class="swiper_item">
+                <span class="notice">通知</span>
+                <span class="notice_content">{{item}}</span>
+              </view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </div>
     </div>
 
-    <div class="commodity">
+    <div class="commodity"
+         style=" margin-top: 20rpx;">
       <div class="commodity_head">
         <img src="../../../images/commodity-rec.png"
              class="commodity_icon" />
       </div>
     </div>
-
-    <div class="recommend container">
-      <span>人气推荐</span>
-      <img src="../../../images/arrow-right.png"
-           class="all_variable" />
-    </div>
     <div class="shopping_modular ">
-      <div class="shopping_list">
-        <div v-for=" (item, idx) in  shoppingList"
-             :key="idx"
-             @tap="shpooingDetails(item)"
-             class="shopping">
-          <div class="shopping_publicity">
-            <img :src="[item.status == 1 ? '../../../images/hot.png': item.status == 2 ? '../../../images/recommend.png':'../../../images/event.png']"
-                 class="shopping_pic_hot"
-                 v-if="item.status != 0" />
-            <img :src="item.pic"
-                 class="shopping_pic" />
-          </div>
-          <div class="shopping_state">
-            <div class="shopping_head"><span>{{item.name}}</span></div>
-            <div class="discounts"
-                 v-if="item.discountsStatus.length !=0">
-              <span class="discounts_text"
-                    v-for="(itemDiscounts, id) in item.discountsStatus"
-                    :key="id">{{itemDiscounts.name}}</span>
-            </div>
-            <div class="shopping_price">
-              <span class="similar_product_price">¥
-                <span class="big_price">{{item.sellPrice}}</span>
-                <span class="small-price">.{{item.decimalsPrice}}</span>
-              </span>
-            </div>
-            <div class="shopping_price past_due">
-              <span class="similar_product_price">¥
-                <span class="big_price">{{item.originalPrice}}</span>
-                <span class="small-price">.{{item.originalDecimalsPrice}}</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <commodityList :shoppingList="shoppingArray" />
+      <div class="load_data">上拉加载中...</div>
     </div>
-    <div class="load_data">上拉加载中...</div>
   </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 import store from '../../../store'
+const shopping = [
+  {
+    name: '源自1987的',
+    status: 1, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 78.05,
+    originalPrice: 90.00,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 2, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.50,
+    originalPrice: 150.00,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  },
+  {
+    name: '源自1987的',
+    status: 0, // 0正常 1：hot 2 活动 3：热销
+    pic: '../../images/timg.jpg',
+    sellPrice: 90.80,
+    originalPrice: 150.90,
+    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+  }
+]
 wepy.page({
+  name: 'home',
   store,
   config: {
     navigationBarTitleText: 'test'
   },
 
   data: {
+    background2: [
+      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+      'demo-text-2',
+      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+      'demo-text-3',
+      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大'
+    ],
     background: ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'],
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
     duration: 500,
-    shoppingList: [
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 1, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 78,
-        decimalsPrice: '50',
-        originalPrice: 90,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 2, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 90,
-        decimalsPrice: '50',
-        originalPrice: 150,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 3, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 70,
-        decimalsPrice: '50',
-        originalPrice: 80,
-        originalDecimalsPrice: '00',
-        discountsStatus: []
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 90,
-        decimalsPrice: '50',
-        originalPrice: 150,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 70,
-        decimalsPrice: '50',
-        originalPrice: 80,
-        originalDecimalsPrice: '00',
-        discountsStatus: []
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 90,
-        decimalsPrice: '50',
-        originalPrice: 150,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 90,
-        decimalsPrice: '50',
-        originalPrice: 150,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      },
-      {
-        name: '源自1987的源自1987的源自1987的源自1987的源自1987的源自1987的',
-        status: 0, // 0正常 1：hot 2 活动 3：热销
-        pic: '../../../images/8.jpg',
-        sellPrice: 90,
-        decimalsPrice: '50',
-        originalPrice: 150,
-        originalDecimalsPrice: '00',
-        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-      }
-    ]
+    shoppingArray: []
   },
   methods: {
     onLoad (options) {
+      this.onLoadShopping()
     },
     onPullDownRefresh () {
       console.log('下拉加载.....')
+      this.onLoadShopping()
       wx.stopPullDownRefresh()
     },
     onReachBottom () {
+      // const list = this.shoppingArray.concat(shopping)
       console.log('上拉加载.....')
+      let arr1 = this.data.shoppingArray || []
+      arr1 = arr1.concat(shopping)
+      this.setData({ shoppingArray: arr1 })
     },
-    shpooingDetails (details) {
-      wx.navigateTo({
-        url: `../../particulars/index?shoppingId=1`
-      })
+    onLoadShopping () {
+      this.setData({ shoppingArray: shopping })
     },
     handleTap () {
       console.log('++++++++++++++++++++++')
@@ -233,8 +213,7 @@ wepy.page({
 <style lang="less" scoped>
 @import '../../../assets/variable.less';
 @swiperH: 286rpx;
-@shoppingW: 338rpx;
-@shoppingRadius: 12rpx;
+@mall_ad_h: 141rpx;
 .home {
   display: flex;
   flex: 1;
@@ -305,6 +284,7 @@ wepy.page({
   display: flex;
   flex: 1;
   background: #fff;
+  flex-direction: column;
   .commodity_head {
     display: flex;
     flex: 1;
@@ -318,108 +298,50 @@ wepy.page({
     }
   }
 }
-
-.recommend {
-  margin-top: 16rpx;
+.mall_advertising {
   display: flex;
-  flex: 1;
-  flex-direction: row;
-  height: 40rpx;
-  font-size: 34rpx;
-  color: @accessoryText;
+  height: @mall_ad_h;
   align-items: center;
-  justify-content: space-between;
-  .all_variable {
-    width: 13rpx;
-    height: 24rpx;
+
+  .mall_ad {
+    width: 92rpx;
+    height: 79rpx;
+    margin-left: 37rpx;
+    margin-right: 14rpx;
+  }
+  .mall_line {
+    width: 1rpx;
+    height: 65rpx;
+    background: #c3c3c3;
   }
 }
-.shopping_modular {
-  .shopping_list {
+.revolving_door {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  height: @mall_ad_h - 40rpx;
+  .swiper_item {
     display: flex;
-    display: -webkit-flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    flex-direction: row;
-    background: @bgcolor;
-    padding: 0 24rpx;
-    .shopping {
+    flex: 1;
+    align-items: center;
+    .notice {
       display: flex;
-      width: @shoppingW;
-      flex-direction: column;
-      margin-top: 24rpx;
-      .shopping_publicity {
-        position: relative;
-        width: @shoppingW;
-        height: 336rpx;
-        .shopping_pic {
-          width: @shoppingW;
-          height: inherit;
-          border-radius: @shoppingRadius @shoppingRadius 0 0;
-        }
-        .shopping_pic_hot {
-          position: absolute;
-          width: 100rpx;
-          height: 100rpx;
-          right: 0;
-          top: 0;
-        }
-      }
-      .shopping_state {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        padding: 15rpx;
-        border-radius: 0 0 @shoppingRadius @shoppingRadius;
-        background: #fff;
-        .shopping_head {
-          display: flex;
-          flex: 1;
-          font-size: 30rpx;
-          color: @accessoryText;
-          word-break: break-all;
-          text-overflow: ellipsis;
-          display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
-          -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
-          -webkit-line-clamp: 2; /** 显示的行数 **/
-          overflow: hidden; /** 隐藏超出的内容 **/
-        }
-        .discounts {
-          display: flex;
-          flex-direction: row;
-          .discounts_text {
-            border: 0.5rpx solid @moneyColor;
-            color: @moneyColor;
-            font-size: 20rpx;
-            margin: 5rpx;
-            padding: 2rpx 5rpx;
-          }
-        }
-        .shopping_price {
-          display: flex;
-          flex-direction: row;
-          color: @moneyColor;
-          .similar_product_price {
-            font-size: 26rpx;
-          }
-          .big_price {
-            font-size: 32rpx;
-          }
-          .small-price {
-            font-size: 20rpx;
-          }
-        }
-        .past_due {
-          text-decoration: line-through;
-          color: #a9a5a5;
-          .similar_product_price {
-            font-size: 20rpx;
-          }
-          .big_price {
-            font-size: 26rpx;
-          }
-        }
-      }
+      color: @subjectColor;
+      border: 1rpx solid @subjectColor;
+      padding: 2rpx 5rpx;
+      font-size: 18rpx;
+      margin: 0 10rpx;
+    }
+    .notice_content {
+      display: flex;
+      flex: 1;
+      font-size: 30rpx;
+      color: #b2b2b2;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
     }
   }
 }
@@ -436,5 +358,8 @@ wepy.page({
     navigationBarTitleText: '首页',
     enablePullDownRefresh:true,
     onReachBottomDistance:100,
+    usingComponents: {
+			commodityList: '../../../components/commodityList/shoppingList',
+		}
 	}
 </config>
