@@ -51,11 +51,11 @@ wepy.app({
 <config>
 	{
 		pages: [
+      'pages/particulars/index',
 			'pages/home/home/index',
       'pages/home/person/index',
 			'pages/home/cart/index',
-			'pages/home/classification/index',
-       'pages/particulars/index',
+			'pages/home/classification/index',       
 		],
 		window: {
 		  "navigationBarBackgroundColor": "#fff",

@@ -26,32 +26,28 @@
         </swiper-item>
       </swiper>
     </div>
-    <div class="shopping_guide">
-      <div class="guide">
-        <img src="../../../images/site-clearing.png"
-             class="shopping_icon" />
-        <span class="guide_text">清场甩货</span>
-      </div>
-      <div class="guide">
-        <img src="../../../images/activity-icon.png"
-             class="shopping_icon" />
-        <span class="guide_text">活动版块</span>
-      </div>
-      <div class="guide">
-        <img src="../../../images/integral-icon.png"
-             class="shopping_icon" />
-        <span class="guide_text">积分兑换</span>
-      </div>
-      <div class="guide">
-        <img src="../../../images/serve-icon.png"
-             class="shopping_icon" />
-        <span class="guide_text">套餐服务</span>
-      </div>
-    </div>
-    <div class="commodity">
-      <div class="commodity_head">
-        <img src="../../../images/activity-area.png"
-             class="commodity_icon" />
+    <div style=" background: #fff;">
+      <div class="shopping_guide">
+        <div class="guide">
+          <img src="../../../images/site-clearing.png"
+               class="shopping_icon" />
+          <span class="guide_text">清场甩货</span>
+        </div>
+        <div class="guide">
+          <img src="../../../images/activity-icon.png"
+               class="shopping_icon" />
+          <span class="guide_text">活动版块</span>
+        </div>
+        <div class="guide">
+          <img src="../../../images/integral-icon.png"
+               class="shopping_icon" />
+          <span class="guide_text">积分兑换</span>
+        </div>
+        <div class="guide">
+          <img src="../../../images/serve-icon.png"
+               class="shopping_icon" />
+          <span class="guide_text">套餐服务</span>
+        </div>
       </div>
       <div class="mall_advertising">
         <img src="../../../images/mall-ad-icon.png"
@@ -76,8 +72,28 @@
       </div>
     </div>
 
-    <div class="commodity"
-         style=" margin-top: 20rpx;">
+    <div class="commodity">
+      <div class="commodity_head">
+        <img src="../../../images/activity-area.png"
+             class="commodity_icon" />
+      </div>
+      <div class="advertise">
+        <img src="../../../images/feast.png"
+             class="feast_icon" />
+        <div class="advertising">
+          <img src="../../../images/group-buying.png"
+               class="group_buying" />
+          <div class="advertise">
+            <img src="../../../images/foison-icon.png"
+                 class="foison_icon" />
+            <img src="../../../images/vouchsafe-icon.png"
+                 class="foison_icon" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="commodity">
       <div class="commodity_head">
         <img src="../../../images/commodity-rec.png"
              class="commodity_icon" />
@@ -262,7 +278,6 @@ wepy.page({
 .shopping_guide {
   display: flex;
   height: 192rpx;
-  background: #fff;
   .guide {
     display: flex;
     flex: 1;
@@ -285,6 +300,7 @@ wepy.page({
   flex: 1;
   background: #fff;
   flex-direction: column;
+  margin-top: 20rpx;
   .commodity_head {
     display: flex;
     flex: 1;
@@ -345,6 +361,26 @@ wepy.page({
     }
   }
 }
+.advertise {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  .feast_icon {
+    width: 305rpx;
+    height: 443rpx;
+  }
+  .advertising {
+    .group_buying {
+      width: 444rpx;
+      height: 221rpx;
+    }
+  }
+  .foison_icon {
+    width: 221rpx;
+    height: 221rpx;
+  }
+}
+
 .load_data {
   display: flex;
   flex: 1;

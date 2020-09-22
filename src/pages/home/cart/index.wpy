@@ -7,15 +7,15 @@ import wepy from '@wepy/core'
 
 wepy.page({
   data: {
-    msg: 'cart',
-    methods: {}
-  }
+    msg: 'cart'
+  },
+  methods: {}
 })
 </script>
+<style lang='less' scoped>
+</style>
 <config>
 	{
 	navigationBarTitleText: '购物车',
 	}
 </config>
-<style lang='less' scoped>
-</style>
