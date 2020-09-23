@@ -15,55 +15,56 @@ import vuex from '@wepy/x'
 
 wepy.use(vuex)
 wepy.app({
-  hooks: {
-    // App 级别 hook，对整个 App 生效
-    // 同时存在 Page hook 和 App hook 时，优先执行 Page hook，返回值再交由 App hook 处
-    'before-setData': function (dirty) {
-      console.log('setData dirty: ', dirty)
-      return dirty
-    }
-  },
-  globalData: {
-    userInfo: null
-  },
-  onLaunch () {
-    this.testAsync()
-    eventHub.$on('app-launch', (...args) => {
-      console.log('app-launch event emitted, the params are:')
-      console.log(args)
-    })
-  },
-  methods: {
-    sleep (s) {
-      return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve('promise resolved')
-        }, s * 1000)
-      })
+    hooks: {
+        // App 级别 hook，对整个 App 生效
+        // 同时存在 Page hook 和 App hook 时，优先执行 Page hook，返回值再交由 App hook 处
+        'before-setData': function (dirty) {
+            console.log('setData dirty: ', dirty)
+            return dirty
+        }
     },
-    async testAsync () {
-      let d = await this.sleep(3)
-      console.log(d)
+    globalData: {
+        userInfo: null
+    },
+    onLaunch () {
+        this.testAsync()
+        eventHub.$on('app-launch', (...args) => {
+            console.log('app-launch event emitted, the params are:')
+            console.log(args)
+        })
+    },
+    methods: {
+        sleep (s) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('promise resolved')
+                }, s * 1000)
+            })
+        },
+        async testAsync () {
+            let d = await this.sleep(3)
+            console.log(d)
+        }
     }
-  }
 })
 </script>
 <config>
 	{
 		pages: [
-      'pages/particulars/index',
+            'pages/login/index',
 			'pages/home/home/index',
-      'pages/home/person/index',
+            'pages/home/person/index',
 			'pages/home/cart/index',
-			'pages/home/classification/index',       
+			'pages/home/classification/index',  
+            'pages/particulars/index',     
 		],
 		window: {
-		  "navigationBarBackgroundColor": "#fff",
+		    "navigationBarBackgroundColor": "#fff",
 			"navigationBarTextStyle": "black",
 			"navigationBarTitleText": "广东和源酒业有限公司",
-      "backgroundColor": "#eee",
-      "backgroundTextStyle": "dark"
-      // "navigationStyle":"custom",
+            "backgroundColor": "#eee",
+            "backgroundTextStyle": "dark"
+            // "navigationStyle":"custom",
 		},
 		tabBar: {
 			color:'#BCBCBC',
@@ -76,7 +77,7 @@ wepy.app({
 					"iconPath": "images/home.png",
 					"selectedIconPath": "images/home-active.png"
 				},
-        {
+                {
 					"pagePath": "pages/home/classification/index",
 					"text": "分类",
 					"iconPath": "images/classification.png",
@@ -88,7 +89,7 @@ wepy.app({
 					"iconPath": "images/cart.png",
 					"selectedIconPath": "images/cart-active.png"
 				},
-        	{
+        	    {
 					"pagePath": "pages/home/person/index",
 					"text": "我的",
 					"iconPath": "images/person.png",

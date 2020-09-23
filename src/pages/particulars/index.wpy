@@ -18,7 +18,7 @@
         <!-- 优惠券 start -->
         <div class="discount">
             <div class="discount_list">
-                <div class="discount_ticket">店铺券满500减80</div>
+                <span class="discount_ticket">店铺券满500减80</span>
                 <div class="discount_ticket">满100得100积分</div>
             </div>
             <div class="more_discount">领券
@@ -64,13 +64,26 @@
         <!-- 产品详情 end  &&  产品详情 start-->
         <div class="product_details">
             <span class="details_name">澳大利亚赤霞珠干红葡萄酒</span>
-            <image src="../../images/{{item}}" v-for="(item, index) in  detailsPic" :key="index" class="details_icon" mode='widthFix' />
+            <image mode="widthFix" src="../../images/{{item}}" v-for="(item, index) in  detailsPic" :key="index" class="details_icon" />
         </div>
         <span class="details">—— 产品详情 ——</span>
         <!-- 产品详情 end  &&  推荐 start-->
         <!-- 推荐 end  &&  底部 start-->
         <div class="footer">
-
+            <div class="footer_submit" style=" flex: 1;">
+                <div class="after_sale">
+                    <image src="../../images/after-sale-icon.png" class="after_icon" />
+                    <span class="after_sale_text">客服</span>
+                </div>
+                <div class="after_sale">
+                    <image src="../../images/after-cart-icon.png" class="after_icon" />
+                    <span class="after_sale_text">购物车</span>
+                </div>
+            </div>
+            <div class="footer_submit">
+                <div class="join_cart">加入购物车</div>
+                <div class="join_buy">加入购物车</div>
+            </div>
         </div>
         <!-- 推荐 底部  &&   start-->
     </div>
@@ -112,6 +125,7 @@ wepy.page({
   display: flex;
   flex-direction: column;
   background: @bgcolor;
+  padding-bottom: 110rpx;
 }
 .page_section_spacing {
   width: 750rpx;
@@ -173,15 +187,17 @@ wepy.page({
   .discount_list {
     display: flex;
     align-items: center;
+    flex: 1;
     .discount_ticket {
       display: flex;
       align-items: center;
       height: 42rpx;
       font-size: 24rpx;
-      margin-right: 36rpx;
-      padding: 0 19rpx;
+      margin-right: 30rpx;
+      padding: 0 15rpx;
       background: #fee0cf;
       border-radius: 6rpx;
+      white-space: nowrap;
     }
   }
   .more_discount {
@@ -281,7 +297,50 @@ wepy.page({
   bottom: 0;
   right: 0;
   left: 0;
-  background: #000;
+  border-top: 1px solid #e8e8e8;
+  background: #fff;
+  padding: 0rpx @listPLR;
+  justify-content: space-between;
+  .after_sale {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    width: 100rpx;
+    .after_sale_text {
+      font-size: 22rpx;
+      color: #666;
+    }
+    .after_icon {
+      width: 36rpx;
+      height: 35rpx;
+    }
+  }
+  .footer_submit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .join_footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 208rpx;
+      height: 68rpx;
+      border-radius: 34rpx;
+      font-size: 30rpx;
+      color: #fff;
+      margin: 0 6rpx;
+    }
+    .join_cart {
+      .join_footer;
+      background: linear-gradient(-30deg, @subjectColorStart, @subjectColor);
+    }
+    .join_buy {
+      .join_footer;
+      background: linear-gradient(-30deg, @joinBuyStart, @joinBuyEnd);
+    }
+  }
 }
 .details {
   display: flex;

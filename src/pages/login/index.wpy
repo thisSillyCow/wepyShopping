@@ -1,0 +1,181 @@
+<template>
+    <div class="login">
+        <div class="login_box">
+            <div class="login_input" v-if="loginType==='login'">
+                <div class="login_list">
+                    <span class="login_name">手机号</span>
+                    <input type="text" placeholder="点击输入手机号" class="login_phone" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">密 码</span>
+                    <input type="password" placeholder="密码由6-18个字符组成" class="login_phone login_line" />
+                </div>
+
+            </div>
+            <div class="login_input" v-if="loginType==='register'">
+                <div class="login_list">
+                    <span class="login_name">手机号</span>
+                    <input type="text" placeholder="点击输入手机号" class="login_phone" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">密 码</span>
+                    <input type="password" placeholder="密码由6-18个字符组成" class="login_phone login_line" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">确认密码</span>
+                    <input type="password" placeholder="确认密码由6-18个字符组成" class="login_phone login_line" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">验证码</span>
+                    <div class="login_phone login_line">
+                        <input type="text" placeholder="输入验证码" class="login_phone " />
+                        <div class="verification_code">获取验证码</div>
+                    </div>
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">邀请人</span>
+                    <input type="text" placeholder="邀请人账号（选填）" class="login_phone login_line" />
+                </div>
+            </div>
+            <div class="login_input" v-if="loginType==='forgetPwd'">
+                <div class="login_list">
+                    <span class="login_name">手机号</span>
+                    <input type="text" placeholder="点击输入手机号" class="login_phone" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">密 码</span>
+                    <input type="password" placeholder="密码由6-18个字符组成" class="login_phone login_line" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">确认密码</span>
+                    <input type="password" placeholder="确认密码由6-18个字符组成" class="login_phone login_line" />
+                </div>
+                <div class="login_list ">
+                    <span class="login_name">验证码</span>
+                    <div class="login_phone login_line">
+                        <input type="text" placeholder="输入验证码" class="login_phone " />
+                        <div class="verification_code">获取验证码</div>
+                    </div>
+                </div>
+            </div>
+            <div class="login_submit">{{loginMsg}}</div>
+            <div class="features">
+                <div @tap="forgetPwd" v-if="loginType != 'forgetPwd'">忘记密码</div>
+                <div @tap="registerLogin" v-if="loginType != 'login'">登录</div>
+                <div @tap="register" v-if="loginType != 'register'">立即注册</div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+wepy.page({
+    name: 'login',
+    data: {
+        loginMsg: "登 录",
+        loginType: 'login',// [login: 登录] [register: 注册] [forgetPwd: 忘记密码]
+    },
+    methods: {
+        onLoad () {
+            this.registerLogin();
+        },
+        register () {
+            this.loginMsg = "立即注册"
+            this.loginType = "register"
+        },
+        forgetPwd () {
+            this.loginMsg = "忘记密码"
+            this.loginType = "forgetPwd"
+        },
+        registerLogin () {
+            this.loginMsg = "登 录"
+            this.loginType = "login"
+        }
+    }
+})
+</script>
+<style lang='less' scoped>
+@import '../../assets/variable.less';
+
+.login {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: @bgcolor;
+  height: 100vh;
+}
+.login_box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.login_input {
+  width: @inputW;
+  background: #ffffff;
+  border-radius: 20rpx;
+  margin-top: 120rpx;
+  margin-bottom: 60rpx;
+  display: flex;
+  flex-direction: column;
+  .login_list {
+    display: flex;
+    flex-direction: row;
+    height: @inputH;
+    .login_name {
+      display: flex;
+      width: 172rpx;
+      color: @salesColor;
+      font-size: 34rpx;
+      justify-content: center;
+      align-items: center;
+    }
+    .login_phone {
+      display: flex;
+      flex: 1;
+      height: @inputH;
+
+      font-size: 34rpx;
+    }
+    .verification_code {
+      display: flex;
+      flex: 1;
+      height: @inputH;
+      font-size: 30rpx;
+      color: @subjectColor;
+      justify-content: center;
+      align-items: center;
+    }
+    .login_line {
+      border-top: 1rpx solid #e8e8e8;
+    }
+  }
+}
+.features {
+  display: flex;
+  width: @inputW;
+  color: @subjectColor;
+  font-size: 30rpx;
+  justify-content: space-between;
+  margin-top: 31rpx;
+}
+.login_submit {
+  display: flex;
+  width: @inputW;
+  height: 88rpx;
+  border-radius: 44rpx;
+  font-size: 34rpx;
+  color: #fff;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background: linear-gradient(-30deg, @subjectColor, @subjectColorStart);
+  box-shadow: 0px 10px 20px 0px rgba(252, 153, 49, 0.4);
+}
+</style>
+<config>
+	{
+	    navigationBarTitleText: '账号登陆',
+	}
+</config>
