@@ -1,18 +1,221 @@
 <template>
-  <div class="cart">{{msg}}</div>
+    <div class="cart">
+        <div class="cart_list">
+            <div class="pitch_up">
+                <img src="../../../images/unShop.png" class="unShop_icon" />
+            </div>
+            <div class="shop_box">
+                <img src="../../../images/shop_one_icon.png" class="shop_icon" />
+                <div class="shop_center">
+                    <span class="shop_name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</span>
+                    <div class="shop_num">
+                        <div class="price">
+                            <span class="buy_price">￥<span style="font-size:34rpx;">500</span></span>
+                            <span class="original_price">￥600</span>
+                        </div>
+                        <div class="buy_num" mode="widthFix">
+                            <div class="num_operate" @tap="shopAdd(0)">-</div>
+                            <span class="shop_buy_num" mode="widthFix">{{shopBuyNum}}</span>
+                            <div class="num_operate" @tap="shopAdd(1)">+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="pitch_up" style="height: 101rpx;flex:1">
+                <img src="../../../images/unShop.png" class="unShop_icon" />
+                <span class="all_shop"> 全选</span>
+            </div>
+            <div class="close_account" v-if="compileGoodsType === 'buy'">
+                <div class="total_price" style="flex:2">
+                    <span>合计：</span>
+                    <span class="pay_price">￥<span style="font-size:32rpx;">500</span></span>
+                </div>
+                <div class="total_price">
+                    <div class="compile_buy" @tap="compileShop('del')">编辑</div>
+                    <div class="compile_buy" @tap="payShop">结算</div>
+                </div>
+            </div>
+            <div class="close_account" v-if="compileGoodsType === 'del'" style="justify-content: flex-end;">
+                <div class="total_price" style="flex:2"></div>
+                <div class="total_price">
+                    <div class="compile_buy" @tap="compileShop('buy')">取消</div>
+                    <div class="compile_buy" @tap="delShop">删除</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 
 wepy.page({
-  data: {
-    msg: 'cart'
-  },
-  methods: {}
+    data: {
+        msg: 'cart',
+        shopBuyNum: 1,
+        compileGoodsType: "del", //[buy:支付商品] , [del:编辑删除商品]
+    },
+    methods: {
+        shopAdd (addType) {
+            if (addType == 1) {
+                this.shopBuyNum++;
+            } else if (addType == 0) {
+                this.shopBuyNum--;
+                if (this.shopBuyNum <= 0) {
+                    this.shopBuyNum = 0
+                }
+            }
+        },
+        compileShop (compileType) {
+            console.log("编辑商品")
+            this.compileGoodsType = compileType;
+        },
+        payShop () {
+            wx.showToast({
+                title: '支付商品',
+                icon: 'success',
+                duration: 2000
+            })
+        },
+        delShop () {
+            wx.showToast({
+                title: '删除商品',
+                icon: 'success',
+                duration: 2000
+            })
+        }
+    }
 })
 </script>
 <style lang='less' scoped>
+@import '../../../assets/variable.less';
+@shopH: 252rpx;
+.cart {
+  flex: 1;
+  .commBodyColor;
+  height: 100vh;
+  .cart_list {
+    display: flex;
+    height: @shopH;
+    background: #fff;
+    border-bottom: 1rpx solid @borderBottomColor;
+  }
+  .footer {
+    position: fixed;
+    height: 101rpx;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-top: 1rpx solid @borderBottomColor;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.pitch_up {
+  display: flex;
+  height: @shopH;
+  width: 88rpx;
+  justify-content: center;
+  align-items: center;
+  .unShop_icon {
+    width: 40rpx;
+    height: 40rpx;
+  }
+  .all_shop {
+    color: @salesColor;
+    font-size: 24rpx;
+    margin-left: 10rpx;
+  }
+}
+.close_account {
+  display: flex;
+  flex: 4;
+  justify-content: space-between;
+  align-items: center;
+  .total_price {
+    display: flex;
+    flex: 1;
+    color: @salesColor;
+    font-size: 30rpx;
+    .pay_price {
+      font-size: 24rpx;
+      color: @subjectColor;
+    }
+  }
+  .compile_buy {
+    display: flex;
+    flex: 1;
+    color: @subjectColor;
+  }
+}
+.shop_box {
+  display: flex;
+  flex-direction: row;
+  padding: 36rpx 0;
+  .shop_icon {
+    width: 180rpx;
+    height: 180rpx;
+    border-radius: 10rpx;
+  }
+  .shop_center {
+    display: flex;
+    flex-direction: column;
+    padding: 0 26rpx;
+    width: 400rpx;
+    .shop_name {
+      display: flex;
+      color: @salesColor;
+      word-break: break-all;
+      text-overflow: ellipsis;
+      display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+      -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+      -webkit-line-clamp: 2; /** 显示的行数 **/
+      overflow: hidden; /** 隐藏超出的内容 **/
+    }
+    .shop_num {
+      display: flex;
+      flex: 1;
+      align-items: flex-end;
+      justify-content: space-between;
+      .price {
+        display: flex;
+        align-items: flex-end;
+        .buy_price {
+          color: @subjectColor;
+          font-size: 24rpx;
+          margin-right: 20rpx;
+        }
+        .original_price {
+          text-decoration: line-through;
+          color: #cecece;
+          font-size: 25rpx;
+        }
+      }
+      .buy_num {
+        display: flex;
+        border: 1px solid @borderBottomColor;
+        .shop_buy_num {
+          display: flex;
+          padding: 0 15rpx;
+          border-left: 1px solid @borderBottomColor;
+          border-right: 1px solid @borderBottomColor;
+        }
+        .num_operate {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 44rpx;
+          height: 44rpx;
+        }
+      }
+    }
+  }
+}
 </style>
 <config>
 	{

@@ -10,16 +10,20 @@
 @salesColor:#333;
 @superiorColor:#fff;
 @detailsColor:#343434;
+@borderBottomColor:#e8e8e8;
 
 @shoppingRadius: 12rpx;
 @marginBottomNum:16rpx;
 @listPLR: 28rpx;
 @inputH :99rpx;
 @inputW:670rpx;
+.commBodyColor{
+    display: flex;
+    flex-direction: column;
+    background: @superiorColor;
+}
 .commBody{
-  display: flex;
-  flex-direction: column;
-  background: @superiorColor;
+  .commBodyColor;
   margin-bottom: @marginBottomNum;
   padding: 20rpx @listPLR;
 }

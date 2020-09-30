@@ -1,229 +1,211 @@
 <template>
-  <div class="home">
-    <div class="container">
-      <div class="search_head">
-        <div class="search_module">
-          <img src="../../../images/search-icon.png"
-               class="search_icon" />
-          <input type="text"
-                 class="search_commodity"
-                 placeholder="搜索你想要的生活" />
+    <div class="home">
+        <div class="container">
+            <div class="search_head">
+                <div class="search_module" @tap="search">
+                    <img src="../../../images/search-icon.png" class="search_icon" />
+                    <span class="search_commodity">搜索你想要的生活</span>
+                </div>
+                <img src="../../../images/my-icon.png" class="my_head" @tap="myCentre" />
+            </div>
+            <swiper class="page_section_spacing " indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+                <swiper-item v-for="(item, idx) in  background" class="page_section_spacing" :key="idx">
+                    <image src="../../../images/{{item}}" class="page_section_spacing" @tap="handleTap" />
+                </swiper-item>
+            </swiper>
         </div>
-        <img src="../../../images/my-icon.png"
-             class="my_head" />
-      </div>
-      <swiper class="page_section_spacing "
-              indicator-dots="{{indicatorDots}}"
-              autoplay="{{autoplay}}"
-              interval="{{interval}}"
-              duration="{{duration}}">
-        <swiper-item v-for="(item, idx) in  background"
-                     class="page_section_spacing"
-                     :key="idx">
-          <image src="../../../images/{{item}}"
-                 class="page_section_spacing"
-                 @tap="handleTap" />
-        </swiper-item>
-      </swiper>
-    </div>
-    <div style=" background: #fff;">
-      <div class="shopping_guide">
-        <div class="guide">
-          <img src="../../../images/site-clearing.png"
-               class="shopping_icon" />
-          <span class="guide_text">清场甩货</span>
+        <div style=" background: #fff;">
+            <div class="shopping_guide">
+                <div class="guide">
+                    <img src="../../../images/site-clearing.png" class="shopping_icon" />
+                    <span class="guide_text">清场甩货</span>
+                </div>
+                <div class="guide">
+                    <img src="../../../images/activity-icon.png" class="shopping_icon" />
+                    <span class="guide_text">活动版块</span>
+                </div>
+                <div class="guide">
+                    <img src="../../../images/integral-icon.png" class="shopping_icon" />
+                    <span class="guide_text">积分兑换</span>
+                </div>
+                <div class="guide">
+                    <img src="../../../images/serve-icon.png" class="shopping_icon" />
+                    <span class="guide_text">套餐服务</span>
+                </div>
+            </div>
+            <div class="mall_advertising">
+                <img src="../../../images/mall-ad-icon.png" class="mall_ad" />
+                <div class="mall_line" />
+                <swiper class="revolving_door " autoplay="{{autoplay}}" interval="{{interval}}" display-multiple-items="{{2}}" vertical="{{true}}" duration="{{duration}}">
+                    <block v-for="(item, idx) in  background2" :key="idx">
+                        <swiper-item>
+                            <view class="swiper_item">
+                                <span class="notice">通知</span>
+                                <span class="notice_content">{{item}}</span>
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+            </div>
         </div>
-        <div class="guide">
-          <img src="../../../images/activity-icon.png"
-               class="shopping_icon" />
-          <span class="guide_text">活动版块</span>
-        </div>
-        <div class="guide">
-          <img src="../../../images/integral-icon.png"
-               class="shopping_icon" />
-          <span class="guide_text">积分兑换</span>
-        </div>
-        <div class="guide">
-          <img src="../../../images/serve-icon.png"
-               class="shopping_icon" />
-          <span class="guide_text">套餐服务</span>
-        </div>
-      </div>
-      <div class="mall_advertising">
-        <img src="../../../images/mall-ad-icon.png"
-             class="mall_ad" />
-        <div class="mall_line" />
-        <swiper class="revolving_door "
-                autoplay="{{autoplay}}"
-                interval="{{interval}}"
-                display-multiple-items="{{2}}"
-                vertical="{{true}}"
-                duration="{{duration}}">
-          <block v-for="(item, idx) in  background2"
-                 :key="idx">
-            <swiper-item>
-              <view class="swiper_item">
-                <span class="notice">通知</span>
-                <span class="notice_content">{{item}}</span>
-              </view>
-            </swiper-item>
-          </block>
-        </swiper>
-      </div>
-    </div>
 
-    <div class="commodity">
-      <div class="commodity_head">
-        <img src="../../../images/activity-area.png"
-             class="commodity_icon" />
-      </div>
-      <div class="advertise">
-        <img src="../../../images/feast.png"
-             class="feast_icon" />
-        <div class="advertising">
-          <img src="../../../images/group-buying.png"
-               class="group_buying" />
-          <div class="advertise">
-            <img src="../../../images/foison-icon.png"
-                 class="foison_icon" />
-            <img src="../../../images/vouchsafe-icon.png"
-                 class="foison_icon" />
-          </div>
+        <div class="commodity">
+            <div class="commodity_head">
+                <img src="../../../images/activity-area.png" class="commodity_icon" />
+            </div>
+            <div class="advertise">
+                <img src="../../../images/feast.png" class="feast_icon" />
+                <div class="advertising">
+                    <img src="../../../images/group-buying.png" class="group_buying" />
+                    <div class="advertise">
+                        <img src="../../../images/foison-icon.png" class="foison_icon" />
+                        <img src="../../../images/vouchsafe-icon.png" class="foison_icon" />
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="commodity">
-      <div class="commodity_head">
-        <img src="../../../images/commodity-rec.png"
-             class="commodity_icon" />
-      </div>
+        <div class="commodity">
+            <div class="commodity_head">
+                <img src="../../../images/commodity-rec.png" class="commodity_icon" />
+            </div>
+        </div>
+        <div class="shopping_modular ">
+            <commodityList :shoppingList="shoppingArray" />
+            <div class="load_data">上拉加载中...</div>
+        </div>
     </div>
-    <div class="shopping_modular ">
-      <commodityList :shoppingList="shoppingArray" />
-      <div class="load_data">上拉加载中...</div>
-    </div>
-  </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 import store from '../../../store'
 const shopping = [
-  {
-    name: '源自1987的',
-    status: 1, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 78.05,
-    originalPrice: 90.00,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 2, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.50,
-    originalPrice: 150.00,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  },
-  {
-    name: '源自1987的',
-    status: 0, // 0正常 1：hot 2 活动 3：热销
-    pic: '../../images/timg.jpg',
-    sellPrice: 90.80,
-    originalPrice: 150.90,
-    discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
-  }
+    {
+        name: '源自1987的',
+        status: 1, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 78.05,
+        originalPrice: 90.00,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 2, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.50,
+        originalPrice: 150.00,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    },
+    {
+        name: '源自1987的',
+        status: 0, // 0正常 1：hot 2 活动 3：热销
+        pic: '../../images/timg.jpg',
+        sellPrice: 90.80,
+        originalPrice: 150.90,
+        discountsStatus: [{ name: '积分兑换' }, { name: '满99元减50元' }]
+    }
 ]
 wepy.page({
-  name: 'home',
-  store,
-  config: {
-    navigationBarTitleText: 'test'
-  },
+    name: 'home',
+    store,
+    config: {
+        navigationBarTitleText: 'test'
+    },
 
-  data: {
-    background2: [
-      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
-      'demo-text-2',
-      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
-      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
-      'demo-text-3',
-      '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大'
-    ],
-    background: ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'],
-    indicatorDots: true,
-    autoplay: true,
-    interval: 3000,
-    duration: 500,
-    shoppingArray: []
-  },
-  methods: {
-    onLoad (options) {
-      this.onLoadShopping()
+    data: {
+        background2: [
+            '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+            'demo-text-2',
+            '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+            '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大',
+            'demo-text-3',
+            '商城成功孵化，首次测试，希望大商城成功孵化，首次测试，希望大'
+        ],
+        background: ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg'],
+        indicatorDots: true,
+        autoplay: true,
+        interval: 3000,
+        duration: 500,
+        shoppingArray: []
     },
-    onPullDownRefresh () {
-      console.log('下拉加载.....')
-      this.onLoadShopping()
-      wx.stopPullDownRefresh()
-    },
-    onReachBottom () {
-      // const list = this.shoppingArray.concat(shopping)
-      console.log('上拉加载.....')
-      let arr1 = this.data.shoppingArray || []
-      arr1 = arr1.concat(shopping)
-      this.setData({ shoppingArray: arr1 })
-    },
-    onLoadShopping () {
-      this.setData({ shoppingArray: shopping })
-    },
-    handleTap () {
-      console.log('++++++++++++++++++++++')
-    },
-    handleList () {
+    methods: {
+        onLoad (options) {
+            this.onLoadShopping()
+        },
+        onPullDownRefresh () {
+            console.log('下拉加载.....')
+            this.onLoadShopping()
+            wx.stopPullDownRefresh()
+        },
+        onReachBottom () {
+            // const list = this.shoppingArray.concat(shopping)
+            console.log('上拉加载.....')
+            let arr1 = this.data.shoppingArray || []
+            arr1 = arr1.concat(shopping)
+            this.setData({ shoppingArray: arr1 })
+        },
+        onLoadShopping () {
+            this.setData({ shoppingArray: shopping })
+        },
+        handleTap () {
+            console.log('++++++++++++++++++++++')
+        },
+        handleList () {
 
+        },
+        search () {
+            wx.navigateTo({
+                url: `../../search/index`
+            })
+        },
+        myCentre () {
+            console.log('11111111111111')
+            wx.switchTab({
+                url: `../person/index`
+            })
+        }
     }
-  }
 })
 </script>
 <style lang="less" scoped>
@@ -231,10 +213,8 @@ wepy.page({
 @swiperH: 286rpx;
 @mall_ad_h: 141rpx;
 .home {
-  display: flex;
+  .commBodyColor;
   flex: 1;
-  background: @bgcolor;
-  flex-direction: column;
 }
 .container {
   padding: 13rpx 21rpx;
@@ -307,7 +287,7 @@ wepy.page({
     height: 71rpx;
     align-items: center;
     justify-content: center;
-    border-bottom: 1rpx solid#EDEDED;
+    border-bottom: 1rpx solid @borderBottomColor;
     .commodity_icon {
       width: 460rpx;
       height: 54rpx;
