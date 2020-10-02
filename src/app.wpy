@@ -51,13 +51,18 @@ wepy.app({
 <config>
 	{
 		pages: [
-			'pages/home/home/index',
-            'pages/home/person/index',
-			'pages/home/classification/index',  
-            'pages/particulars/index',  
-            'pages/login/index',   
-            'pages/home/cart/index',
-            'pages/search/index',
+			'pages/home/home/index',//首页
+            'pages/home/person/index',//个人中心
+			'pages/home/classification/index',  //分类
+            'pages/home/cart/index',//购物车
+            'pages/particulars/index',  //商品详情
+            'pages/login/index',   //登录
+            'pages/merchandise/index',//商品列表
+            'pages/user/about_us/index',//关于我们
+            'pages/user/address/index',//地址管理
+            'pages/user/enshrine/index', //收藏
+            'pages/user/order/index', //我的订单
+            'pages/user/propose/index', //意见反馈
 		],
 		window: {
 		    "navigationBarBackgroundColor": "#fff",
@@ -78,12 +83,12 @@ wepy.app({
 					"iconPath": "images/home.png",
 					"selectedIconPath": "images/home-active.png"
 				},
-                {
-					"pagePath": "pages/home/classification/index",
-					"text": "分类",
-					"iconPath": "images/classification.png",
-					"selectedIconPath": "images/classification-active.png"
-				},
+                // {
+				// 	"pagePath": "pages/home/classification/index",
+				// 	"text": "分类",
+				// 	"iconPath": "images/classification.png",
+				// 	"selectedIconPath": "images/classification-active.png"
+				// },
 				{
 					"pagePath": "pages/home/cart/index",
 					"text": "购物车",

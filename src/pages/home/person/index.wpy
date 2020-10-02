@@ -2,7 +2,7 @@
     <div class="person">
         <image src="../../../images/stage-backg.jpg" class="page_section" />
         <div class="stage_backg">
-            <div class="user_info">
+            <div class="user_info" @tap="loginUser">
                 <img src="../../../images/head-backg.png" class="heda_backg" />
                 <div class="user_name">
                     <span class="name_money call">用户的名字呀</span>
@@ -14,7 +14,7 @@
             </div>
 
             <div class="order_modular">
-                <div class="my_order">
+                <div class="my_order" @tap="myOrder('all')">
                     <span class="my_order_text">我的订单</span>
                     <div class="display:flex">
                         <span class="look_all">查看全部</span>
@@ -22,19 +22,19 @@
                     </div>
                 </div>
                 <div class="order_state_list">
-                    <div class="order_state">
+                    <div class="order_state" @tap="myOrder('pay')">
                         <img src="../../../images/wait-pay.png" class="order_icon" />
                         <span class="order_text">待付款</span>
                     </div>
-                    <div class="order_state">
+                    <div class="order_state" @tap="myOrder('shipments')">
                         <img src="../../../images/deliver-goods.png" class="order_icon" />
                         <span class="order_text">待发货</span>
                     </div>
-                    <div class="order_state">
+                    <div class="order_state" @tap="myOrder('finish')">
                         <img src="../../../images/completed.png" class="order_icon" />
                         <span class="order_text">已完成</span>
                     </div>
-                    <div class="order_state">
+                    <div class="order_state" @tap="myOrder('evaluate')">
                         <img src="../../../images/evaluation-criterion.png" class="order_icon" />
                         <span class="order_text">待评价</span>
                     </div>
@@ -42,9 +42,9 @@
             </div>
 
             <div class="administration">
-                <div class="administration_list" :style="{borderBottom:(idx==administrationList.length -1?'0rpx':'')}" v-for="(item, idx) in  administrationList" :key="idx">
+                <div class="administration_list" @tap="administration(item.routerNmae)" :style="{borderBottom:(idx==administrationList.length -1?'0rpx':'')}" v-for="(item, idx) in  administrationList" :key="idx">
                     <img src="../../../images/{{item.pic}}" class="list_icon" />
-                    <span class="list_text">{{item.administrationName}} {{idx}}</span>
+                    <span class="list_text">{{item.administrationName}}</span>
                     <img src="../../../images/arrow-right.png" class="list_variable" />
                 </div>
             </div>
@@ -58,12 +58,12 @@ wepy.page({
     data: {
         msg: 'person',
         administrationList: [
-            { pic: 'address.png', administrationName: '地址管理', routerNmae: '' },
-            { pic: 'coupon.png', administrationName: '优惠券', routerNmae: '' },
-            { pic: 'collection.png', administrationName: '我的收藏', routerNmae: '' },
-            { pic: 'help_center.png', administrationName: '帮助中心', routerNmae: '' },
-            { pic: 'feedback.png', administrationName: '意见反馈', routerNmae: '' },
-            { pic: 'about_us.png', administrationName: '关于我们', routerNmae: '' }
+            { pic: 'address.png', administrationName: '地址管理', routerNmae: 'address' },
+            // { pic: 'coupon.png', administrationName: '优惠券', routerNmae: '' },
+            { pic: 'collection.png', administrationName: '我的收藏', routerNmae: 'enshrine' },
+            // { pic: 'help_center.png', administrationName: '帮助中心', routerNmae: '' },
+            { pic: 'feedback.png', administrationName: '意见反馈', routerNmae: 'propose' },
+            { pic: 'about_us.png', administrationName: '关于我们', routerNmae: 'about_us' }
         ]
     },
     methods: {
@@ -93,6 +93,15 @@ wepy.page({
         },
         handleTap () {
             console.log('-----------------------------')
+        },
+        loginUser () {
+            wx.navigateTo({ url: `../../login/index` })
+        },
+        administration (router) {
+            wx.navigateTo({ url: `../../user/${router}/index` })
+        },
+        myOrder (type) {
+            wx.navigateTo({ url: `../../user/order/index?orderType=${type}` })
         }
     }
 })
@@ -145,6 +154,7 @@ wepy.page({
     .amount_money {
       font-size: 28rpx;
       opacity: 0.7;
+      white-space: nowrap; //不换行
     }
   }
   .user_variable {

@@ -1,5 +1,5 @@
 <template>
-    <div class="message">
+    <div class="merchandise">
         {{msg}}
     </div>
 </template>
@@ -17,7 +17,7 @@ wepy.page({
 </script>
 <config>
 	{
-	navigationBarTitleText: '产品分类',
+	navigationBarTitleText: '商品列表',
 	}
 </config>
 <style lang='less' scoped>

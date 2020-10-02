@@ -1,0 +1,28 @@
+<template>
+    <div class="merchandise">
+        {{msg}}
+    </div>
+</template>
+
+<script>
+import wepy from '@wepy/core'
+
+wepy.page({
+    data: {
+        msg: '我的收藏',
+    },
+    computed: {},
+    methods: {
+        onShow (res) {
+            console.log(res)
+        }
+    },
+})
+</script>
+<config>
+	{
+	navigationBarTitleText: '我的收藏',
+	}
+</config>
+<style lang='less' scoped>
+</style>

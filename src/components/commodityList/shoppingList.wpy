@@ -1,59 +1,49 @@
 <template>
-  <div class="shoppingList">
-    <!-- <span>{{msg}}</span> -->
-    <div class="shopping_list">
-      <div v-for=" (item, idx) in  shoppingList"
-           :key="idx"
-           @tap="shpooingDetails(item)"
-           class="shopping">
-        <div class="shopping_num">
-          <div class="shopping_publicity">
-            <img :src="[item.status == 1 ? '../../images/hot.png': item.status == 2 ? '../../images/recommend.png':'../../images/event.png']"
-                 class="shopping_pic_hot"
-                 v-if="item.status != 0" />
-            <img :src="item.pic"
-                 class="shopping_pic" />
-          </div>
-          <div class="shopping_state">
-            <div class="shopping_head"><span>{{item.name}}{{idx}}</span></div>
-            <div class="discounts"
-                 v-if="item.discountsStatus.length !=0">
-              <span class="discounts_text"
-                    v-for="(itemDiscounts, id) in item.discountsStatus"
-                    :key="id">{{itemDiscounts.name}}</span>
+    <div class="shoppingList">
+        <!-- <span>{{msg}}</span> -->
+        <div class="shopping_list">
+            <div v-for=" (item, idx) in  shoppingList" :key="idx" @tap="shpooingDetails(item)" class="shopping">
+                <div class="shopping_num">
+                    <div class="shopping_publicity">
+                        <img :src="[item.status == 1 ? '../../images/hot.png': item.status == 2 ? '../../images/recommend.png':'../../images/event.png']" class="shopping_pic_hot" v-if="item.status != 0" />
+                        <img :src="item.pic" class="shopping_pic" />
+                    </div>
+                    <div class="shopping_state">
+                        <div class="shopping_head"><span>{{item.name}}{{idx}}</span></div>
+                        <div class="discounts" v-if="item.discountsStatus.length !=0">
+                            <span class="discounts_text" v-for="(itemDiscounts, id) in item.discountsStatus" :key="id">{{itemDiscounts.name}}</span>
+                        </div>
+                        <div class="shopping_money">
+                            <div class="shopping_price">
+                                <span class="similar_product_price">¥
+                                    <span class="big_price">{{item.sellPrice}}</span>
+                                </span>
+                            </div>
+                            <div class="past_due"> ¥{{item.originalPrice}} </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="shopping_money">
-              <div class="shopping_price">
-                <span class="similar_product_price">¥
-                  <span class="big_price">{{item.sellPrice}}</span>
-                </span>
-              </div>
-              <div class="past_due"> ¥{{item.originalPrice}} </div>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
 import wepy from '@wepy/core'
 wepy.page({
-  props: {
-    shoppingList: Array
-  },
-  data: {
-    msg: 'shoppingList'
-
-  },
-  methods: {
-    shpooingDetails (details) {
-      wx.navigateTo({
-        url: `../../particulars/index?shoppingId=1`
-      })
+    props: {
+        shoppingList: Array
+    },
+    data: {
+        msg: 'shoppingList'
+    },
+    methods: {
+        shpooingDetails (details) {
+            wx.navigateTo({
+                url: `../../particulars/index?shoppingId=1`
+            })
+        }
     }
-  }
 })
 </script>
 <style lang='less' scoped>
